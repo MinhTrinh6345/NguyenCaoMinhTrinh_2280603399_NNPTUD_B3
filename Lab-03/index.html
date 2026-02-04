@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản Lý Sản Phẩm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        body { background:#f4f6fb; }
+        .product-image {
+            width:60px;height:60px;object-fit:cover;border-radius:8px;
+        }
+        .category-badge {
+            background:#e0e7ff;color:#3730a3;
+            padding:4px 10px;border-radius:20px;font-size:13px;
+        }
+        .price-highlight { font-weight:600;color:#dc2626 }
+    </style>
+</head>
+<body>
+
+<div class="container py-4">
+
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3><i class="bi bi-box-seam"></i> Dashboard Sản Phẩm</h3>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createProductModal">
+            <i class="bi bi-plus-circle"></i> Thêm sản phẩm
+        </button>
+    </div>
+
+    <!-- TOOLBAR -->
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <input type="text" id="searchInput" class="form-control" placeholder="Tìm theo tên sản phẩm...">
+        </div>
+        <div class="col-md-3">
+            <select id="itemsPerPage" class="form-select">
+                <option value="5">5 / trang</option>
+                <option value="10" selected>10 / trang</option>
+                <option value="20">20 / trang</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <button id="exportBtn" class="btn btn-success">
+                <i class="bi bi-file-earmark-excel"></i> Xuất CSV
+            </button>
+        </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-responsive bg-white rounded shadow-sm">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Tên</th>
+                    <th>Giá</th>
+                    <th>Danh mục</th>
+                    <th>Ảnh</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="productsTableBody">
+                <tr>
+                    <td colspan="6" class="text-center py-4">
+                        <div class="spinner-border"></div>
+                        <div>Đang tải dữ liệu...</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="d-flex justify-content-between align-items-center mt-3">
+        <div>Tổng: <strong id="totalItems">0</strong> sản phẩm</div>
+        <ul class="pagination mb-0" id="pagination"></ul>
+    </div>
+
+</div>
+
+<!-- ================= MODAL EDIT ================= -->
+<div class="modal fade" id="productModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="productModalLabel">Chỉnh sửa sản phẩm</h5>
+                <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <img id="modalProductImage" class="img-fluid mb-3 rounded">
+                <h5 id="modalProductTitle"></h5>
+                <p id="modalProductDescription"></p>
+
+                <p><strong>Giá:</strong> <span id="modalProductPrice"></span></p>
+                <p><strong>Danh mục:</strong> <span id="modalProductCategory"></span></p>
+                <p><strong>ID:</strong> <span id="modalProductId"></span></p>
+                <p><strong>Ngày tạo:</strong> <span id="modalProductCreation"></span></p>
+
+                <hr>
+
+                <form id="editProductForm">
+                    <input type="hidden" id="editProductId">
+
+                    <input id="editProductTitle" class="form-control mb-2" placeholder="Tên sản phẩm" required>
+                    <input id="editProductPrice" type="number" class="form-control mb-2" required>
+                    <textarea id="editProductDescription" class="form-control mb-2"></textarea>
+
+                    <select id="editProductCategory" class="form-select mb-2"></select>
+                    <input id="editProductImage" class="form-control mb-2" placeholder="URL hình ảnh">
+
+                    <button class="btn btn-primary w-100">Lưu thay đổi</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================= MODAL CREATE ================= -->
+<div class="modal fade" id="createProductModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title">Tạo sản phẩm mới</h5>
+                <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+            <form id="createProductForm" class="modal-body">
+                <input id="createProductTitle" class="form-control mb-2" placeholder="Tên sản phẩm" required>
+                <input id="createProductPrice" type="number" class="form-control mb-2" required>
+                <textarea id="createProductDescription" class="form-control mb-2" required></textarea>
+                <select id="createProductCategory" class="form-select mb-2"></select>
+                <input id="createProductImage" class="form-control mb-3" required placeholder="URL hình ảnh">
+                <button class="btn btn-success w-100">Tạo sản phẩm</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/script.js"></script>
+</body>
+</html>

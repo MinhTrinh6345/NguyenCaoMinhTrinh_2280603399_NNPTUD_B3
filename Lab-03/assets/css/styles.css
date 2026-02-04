@@ -1,0 +1,234 @@
+:root {
+    --primary: #6a5af9;
+    --bg: #f4f6fb;
+    --card: #ffffff;
+    --text: #1f2937;
+}
+
+body {
+    background: var(--bg);
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--text);
+}
+
+/* HEADER */
+.app-header {
+    background: linear-gradient(135deg, #6a5af9, #8b5cf6);
+    padding: 16px 0;
+    color: white;
+}
+
+.app-header h1 {
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+.btn-gradient {
+    background: white;
+    color: #6a5af9;
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+/* TOOLBAR */
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.search-box {
+    flex: 1;
+    position: relative;
+}
+
+.search-box i {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #9ca3af;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px 12px 10px 36px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+}
+
+.toolbar-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* TABLE */
+.table thead {
+    background: #f9fafb;
+}
+
+.table th {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: #6b7280;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.product-image {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* BADGE */
+.category-badge {
+    background: #eef2ff;
+    color: #4338ca;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 0.8rem;
+}
+
+/* PAGINATION */
+.page-link {
+    border-radius: 8px !important;
+}
+
+:root {
+    --primary:#4f46e5;
+    --primary-soft:#eef2ff;
+    --success:#16a34a;
+    --danger:#dc2626;
+    --dark:#111827;
+    --gray:#6b7280;
+    --bg:#f3f4f6;
+}
+
+body {
+    background: linear-gradient(135deg,#eef2ff,#f8fafc);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+h3 {
+    color: var(--dark);
+    font-weight: 700;
+}
+
+/* Card */
+.table-responsive {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,.08);
+    background: white;
+}
+
+/* Table */
+table thead {
+    background: var(--primary-soft);
+}
+
+table thead th {
+    color: var(--primary);
+    font-weight: 600;
+    border-bottom: none;
+}
+
+table tbody tr {
+    transition: .2s;
+}
+
+table tbody tr:hover {
+    background: #f9fafb;
+    transform: scale(1.002);
+}
+
+/* Image */
+.product-image {
+    width:60px;
+    height:60px;
+    object-fit:cover;
+    border-radius:12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,.15);
+}
+
+/* Category */
+.category-badge {
+    background: var(--primary-soft);
+    color: var(--primary);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* Price */
+.price-highlight {
+    font-weight: 700;
+    color: var(--danger);
+}
+
+/* Inputs */
+.form-control, .form-select {
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.form-control:focus, .form-select:focus {
+    box-shadow: 0 0 0 3px rgba(79,70,229,.15);
+    border-color: var(--primary);
+}
+
+/* Buttons */
+.btn-primary {
+    background: var(--primary);
+    border: none;
+    border-radius: 12px;
+}
+
+.btn-success {
+    background: var(--success);
+    border-radius: 12px;
+}
+
+.btn-danger {
+    background: var(--danger);
+    border-radius: 12px;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(0,0,0,.15);
+}
+
+/* Pagination */
+.pagination .page-link {
+    border-radius: 10px;
+    margin: 0 4px;
+    color: var(--primary);
+    border: none;
+}
+
+.pagination .active .page-link {
+    background: var(--primary);
+    color: white;
+}
+
+/* Modal */
+.modal-content {
+    border-radius: 18px;
+    box-shadow: 0 20px 40px rgba(0,0,0,.25);
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+/* Toast */
+.toast {
+    border-radius: 14px;
+}
